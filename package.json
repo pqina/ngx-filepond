@@ -37,7 +37,7 @@
     "packagr": "ng-packagr -p src/app/modules/filepond/ng-package.json"
   },
   "dependencies": {
-    "filepond": "^1.5.2",
+    "filepond": "^1.8.0",
     "@angular/animations": "^6.0.2",
     "@angular/common": "^6.0.2",
     "@angular/compiler": "^6.0.2",
