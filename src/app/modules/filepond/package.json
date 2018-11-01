@@ -1,6 +1,6 @@
 {
   "name": "ngx-filepond",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "A handy FilePond adapter component for Angular",
   "homepage": "https://pqina.nl/filepond",
   "license": "MIT",
@@ -26,10 +26,8 @@
     "type": "git",
     "url": "https://github.com/pqina/ngx-filepond.git"
   },
-  "dependencies": {
-    "filepond": "^3.0.2"
-  },
   "peerDependencies": {
+    "filepond": "^3.0.0",
     "@angular/common": "^6.0.2",
     "@angular/core": "^6.0.2"
   }
