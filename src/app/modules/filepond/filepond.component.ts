@@ -56,7 +56,9 @@ const outputs: Array<string> = [
   'onprocessfileabort', 
   'onprocessfilerevert', 
   'onprocessfile', 
-  'onremovefile'
+  'onremovefile',
+  'onpreparefile',
+  'onupdatefiles'
 ];
 
 // Component outline
