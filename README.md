@@ -12,7 +12,7 @@ Angular FilePond is a handy adapter component for [FilePond](https://github.com/
 Install FilePond component from npm.
 
 ```bash
-npm install ngx-filepond --save
+npm install ngx-filepond filepond --save
 ```
 
 Import `FilePondModule` and if needed register any plugins. Please note that plugins need to be [installed from npm](https://pqina.nl/filepond/docs/patterns/plugins/introduction/#installing-plugins) separately.
