@@ -11,14 +11,30 @@ export class AppComponent {
   @ViewChild('myPond') myPond: any;
 
   pondOptions = {
-    class:'bar',
     multiple: true,
-    labelIdle:'hello',
-    acceptedFileTypes:'image/jpeg, image/png'
+    labelIdle: 'Drop files here...',
+    // fake server to simulate loading a 'local' server file and processing a file
+    server: {
+      process: (fieldName, file, metadata, load) => {
+        // simulates uploading a file
+        setTimeout(() => {
+          load(Date.now())
+        }, 1500);
+      },
+      load: (source, load) => {
+        // simulates loading a file from the server
+        fetch(source).then(res => res.blob()).then(load);
+      }
+    }
   }
 
   pondFiles = [
-    'index.html'
+    {
+      source: 'assets/photo.jpeg',
+      options: {
+        type: 'local'
+      }
+    }
   ]
 
   pondHandleInit() {

@@ -5,9 +5,10 @@ import { AppComponent } from './app.component';
 
 import { FilePondModule, registerPlugin } from './modules/filepond/filepond.module';
 
-import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 
-registerPlugin(FilePondPluginFileValidateType);
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 @NgModule({
   declarations: [
