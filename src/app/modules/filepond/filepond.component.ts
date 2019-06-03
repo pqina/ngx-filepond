@@ -48,6 +48,7 @@ const outputs: Array<string> = [
   'oninit', 
   'onwarning', 
   'onerror', 
+  'onactivatefile',
   'onaddfilestart', 
   'onaddfileprogress', 
   'onaddfile', 
@@ -55,7 +56,8 @@ const outputs: Array<string> = [
   'onprocessfileprogress', 
   'onprocessfileabort', 
   'onprocessfilerevert', 
-  'onprocessfile', 
+  'onprocessfile',
+  'onprocessfiles',
   'onremovefile',
   'onpreparefile',
   'onupdatefiles'
