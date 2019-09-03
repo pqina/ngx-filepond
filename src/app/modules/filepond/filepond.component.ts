@@ -11,7 +11,9 @@ import {
 
 import {
   create,
-  supported
+  supported,
+  FilePond,
+  FilePondOptionProps
 } from 'filepond';
 
 // We test if filepond is supported on the current client
@@ -75,14 +77,14 @@ const outputs: Array<string> = [
 export class FilePondComponent {
 
   @Input()
-  options: Object = {};
+  options: FilePondOptionProps = {};
 
   @Input()
-  files: Array<any>;
+  files: FilePondOptionProps['files'];
 
   private root: ElementRef;
   private zone: NgZone;
-  private pond: any;
+  private pond: FilePond;
   private handleEvent: Function = null;
 
   constructor(root: ElementRef, zone: NgZone) {

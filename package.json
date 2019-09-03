@@ -47,11 +47,11 @@
     "@angular/platform-browser-dynamic": "^6.0.2",
     "@angular/router": "^6.0.2",
     "core-js": "^2.5.4",
-    "filepond": "^4.0.1",
-    "filepond-plugin-image-exif-orientation": "^1.0.4",
-    "filepond-plugin-image-preview": "^4.0.1",
+    "filepond": "^4.6.0",
+    "filepond-plugin-image-exif-orientation": "^1.0.6",
+    "filepond-plugin-image-preview": "^4.4.0",
     "rxjs": "^6.0.0",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.3",
@@ -72,7 +72,7 @@
     "ng-packagr": "^2.4.5",
     "protractor": "~5.3.0",
     "ts-node": "~5.0.1",
-    "tslint": "~5.9.1",
-    "typescript": "~2.7.2"
+    "tslint": "~5.19.0",
+    "typescript": "~3.6.2"
   }
 }
