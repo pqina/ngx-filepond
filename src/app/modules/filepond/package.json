@@ -27,8 +27,8 @@
     "url": "https://github.com/pqina/ngx-filepond.git"
   },
   "peerDependencies": {
-    "filepond": ">=4.6.x <5.x",
-    "@angular/common": ">=6.0.0",
-    "@angular/core": ">=6.0.0"
+    "filepond": ">=4.7.1 <5.x",
+    "@angular/common": ">=7.0.0",
+    "@angular/core": ">=7.0.0"
   }
 }
