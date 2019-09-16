@@ -5,7 +5,6 @@ import {
   ViewEncapsulation,
   EventEmitter,
   NgZone,
-  Output, 
   Input
 } from '@angular/core';
 
