@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { FilePondComponent } from './modules/filepond/filepond.component';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import { Component, ViewChild } from '@angular/core';
 
 export class AppComponent {
 
-  @ViewChild('myPond') myPond: any;
+  @ViewChild('myPond') myPond: FilePondComponent;
 
   pondOptions = {
     multiple: true,
