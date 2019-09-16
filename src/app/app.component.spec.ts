@@ -1,12 +1,12 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { FilePondComponent } from './modules/filepond/filepond.component';
+import { FilePondModule } from './modules/filepond/public_api';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({ 
+      imports: [FilePondModule],
       declarations: [
-        AppComponent,
-        FilePondComponent
+        AppComponent
       ],
     }).compileComponents();
   }));
