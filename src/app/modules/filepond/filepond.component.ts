@@ -5,7 +5,10 @@ import {
   ViewEncapsulation,
   EventEmitter,
   NgZone,
-  Input
+  Input,
+  AfterViewInit,
+  OnChanges,
+  OnDestroy
 } from '@angular/core';
 
 import {
@@ -72,8 +75,7 @@ const outputs: Array<string> = [
   styleUrls: ['./filepond.component.css'],
   outputs
 })
-
-export class FilePondComponent {
+export class FilePondComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   @Input()
   options: FilePondOptionProps = {};
