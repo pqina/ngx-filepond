@@ -9,7 +9,7 @@ import { FilePondComponent } from './modules/filepond/filepond.component';
 
 export class AppComponent {
 
-  @ViewChild('myPond', { static: false }) myPond: FilePondComponent
+  @ViewChild('myPond') myPond: FilePondComponent
 
   pondOptions = {
     multiple: true,
