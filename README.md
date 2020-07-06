@@ -59,6 +59,8 @@ export class AppModule { }
 ```ts
 // app.component.ts
 import { Component, ViewChild } from '@angular/core';
+import { FilePondComponent } from './modules/filepond/filepond.component';
+import { FilePondOptionProps } from 'filepond';
 
 @Component({
   selector: 'app-root',
@@ -68,16 +70,16 @@ import { Component, ViewChild } from '@angular/core';
 
 export class AppComponent {
 
-  @ViewChild('myPond') myPond: any;
+  @ViewChild('myPond') myPond: FilePondComponent;
 
-  pondOptions = {
+  pondOptions: FilePondOptionProps = {
     class: 'my-filepond',
-    multiple: true,
+    allowMultiple: true,
     labelIdle: 'Drop files here',
     acceptedFileTypes: 'image/jpeg, image/png'
   }
 
-  pondFiles = [
+  pondFiles: FilePondOptionProps["files"] = [
     'index.html'
   ]
 
