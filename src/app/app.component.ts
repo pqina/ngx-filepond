@@ -46,4 +46,8 @@ export class AppComponent {
     console.log('A file was added', event);
   }
 
+  pondHandleActivateFile(event: any) {
+    console.log('A file was activated', event)
+  }
+
 }
