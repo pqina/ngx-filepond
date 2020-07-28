@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FilePondComponent } from './modules/filepond/filepond.component';
-import { FilePondOptionProps } from 'filepond';
+import { FilePondOptions } from 'filepond';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,7 @@ export class AppComponent {
 
   @ViewChild('myPond') myPond: FilePondComponent
 
-  pondOptions: FilePondOptionProps = {
+  pondOptions: FilePondOptions = {
     allowMultiple: true,
     labelIdle: 'Drop files here...',
     // fake server to simulate loading a 'local' server file and processing a file
@@ -30,7 +30,7 @@ export class AppComponent {
     }
   }
 
-  pondFiles: FilePondOptionProps["files"] = [
+  pondFiles: FilePondOptions["files"] = [
     {
       source: 'assets/photo.jpeg',
       options: {
