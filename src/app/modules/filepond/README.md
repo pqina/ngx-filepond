@@ -53,13 +53,16 @@ export class AppModule { }
     [options]="pondOptions" 
     [files]="pondFiles"
     (oninit)="pondHandleInit()"
-    (onaddfile)="pondHandleAddFile($event)">
+    (onaddfile)="pondHandleAddFile($event)"
+    (onactivatefile)="pondHandleActivateFile($event)">
 </file-pond>
 ```
 
 ```ts
 // app.component.ts
 import { Component, ViewChild } from '@angular/core';
+import { FilePondComponent } from 'ngx-filepond';
+import { FilePondOptions } from 'filepond';
 
 @Component({
   selector: 'app-root',
@@ -69,17 +72,20 @@ import { Component, ViewChild } from '@angular/core';
 
 export class AppComponent {
 
-  @ViewChild('myPond') myPond: any;
+  @ViewChild('myPond') myPond: FilePondComponent
 
-  pondOptions = {
-    class: 'my-filepond',
-    multiple: true,
-    labelIdle: 'Drop files here',
-    acceptedFileTypes: 'image/jpeg, image/png'
+  pondOptions: FilePondOptions = {
+    allowMultiple: true,
+    labelIdle: 'Drop files here...'   
   }
 
-  pondFiles = [
-    'index.html'
+  pondFiles: FilePondOptions["files"] = [
+    {
+      source: 'assets/photo.jpeg',
+      options: {
+        type: 'local'
+      }
+    }
   ]
 
   pondHandleInit() {
@@ -89,7 +95,13 @@ export class AppComponent {
   pondHandleAddFile(event: any) {
     console.log('A file was added', event);
   }
+
+  pondHandleActivateFile(event: any) {
+    console.log('A file was activated', event)
+  }
+
 }
+
 ```
 
 [Read the docs for more information](https://pqina.nl/filepond/docs/patterns/frameworks/angular/)

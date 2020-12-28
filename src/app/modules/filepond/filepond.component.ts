@@ -5,13 +5,17 @@ import {
   ViewEncapsulation,
   EventEmitter,
   NgZone,
-  Output, 
-  Input
+  Input,
+  AfterViewInit,
+  OnChanges,
+  OnDestroy
 } from '@angular/core';
 
 import {
   create,
-  supported
+  supported,
+  FilePond,
+  FilePondOptions
 } from 'filepond';
 
 // We test if filepond is supported on the current client
@@ -71,18 +75,17 @@ const outputs: Array<string> = [
   styleUrls: ['./filepond.component.css'],
   outputs
 })
-
-export class FilePondComponent {
-
-  @Input()
-  options: Object = {};
+export class FilePondComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   @Input()
-  files: Array<any>;
+  options: FilePondOptions = {};
+
+  @Input()
+  files: FilePondOptions['files'];
 
   private root: ElementRef;
   private zone: NgZone;
-  private pond: any;
+  private pond: FilePond;
   private handleEvent: Function = null;
 
   constructor(root: ElementRef, zone: NgZone) {
