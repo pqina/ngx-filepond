@@ -93,8 +93,7 @@ export class AppModule { }
 
 ```ts
 // app.component.ts
-import { Component, ViewChild } from '@angular/core';
-import { FilePondComponent } from 'ngx-filepond';
+import { Component } from '@angular/core';
 import { FilePondOptions } from 'filepond';
 
 @Component({
@@ -104,8 +103,6 @@ import { FilePondOptions } from 'filepond';
 })
 
 export class AppComponent {
-
-  @ViewChild('myPond') myPond: FilePondComponent
 
   pondOptions: FilePondOptions = {
     allowMultiple: true,
@@ -122,7 +119,7 @@ export class AppComponent {
   ]
 
   pondHandleInit() {
-    console.log('FilePond has initialised', this.myPond);
+    console.log('FilePond has initialised');
   }
 
   pondHandleAddFile(event: any) {
