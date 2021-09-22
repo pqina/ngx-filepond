@@ -63,7 +63,7 @@ import { AppComponent } from './app.component';
 import { FilePondModule, registerPlugin } from 'ngx-filepond';
 
 // import and register filepond file type validation plugin
-import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import * as FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 registerPlugin(FilePondPluginFileValidateType);
 
 @NgModule({
