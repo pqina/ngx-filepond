@@ -53,7 +53,7 @@ Import `FilePondModule` and if needed register any plugins. Please note that plu
 
 Add FilePond styles path `./node_modules/filepond/dist/filepond.min.css` to the `build.options.styles` property in `angular.json`
 
-[Setting up FilePond with Angular 13](https://github.com/pqina/ngx-filepond/issues/70)
+[Setting up FilePond with Angular 13](https://github.com/pqina/ngx-filepond/issues/70#issuecomment-1273741734)
 
 ```ts
 // app.module.ts
