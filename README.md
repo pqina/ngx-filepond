@@ -133,6 +133,14 @@ export class AppComponent {
 }
 ```
 
+## How to run project
+
+Run `npm run packagr` to generate package in dist.
+
+Run `npm pack` in dist folder to generate `.tgz` file.
+
+Run `npm install` in project folder.
+
 ## How to fix import errors
 
 If you get a `"types/index" has no default export` error, you can either rewrite the import:
