@@ -26,9 +26,7 @@ Angular FilePond is a handy adapter component for [FilePond](https://github.com/
 
 [Learn more about FilePond](https://pqina.nl/filepond/)
 
-
 <img src="https://github.com/pqina/filepond-github-assets/blob/master/filepond-animation-01.gif?raw=true" width="370" alt=""/>
-
 
 ---
 
@@ -39,7 +37,6 @@ Angular FilePond is a handy adapter component for [FilePond](https://github.com/
 [Learn more about Pintura](https://pqina.nl/pintura/?ref=github-angular-filepond)
 
 <img src="https://github.com/pqina/filepond-github-assets/blob/master/filepond_pintura.gif?raw=true" width="600" alt=""/>
-
 
 ## Installation
 
@@ -55,86 +52,102 @@ Add FilePond styles path `./node_modules/filepond/dist/filepond.min.css` to the 
 
 ```ts
 // app.module.ts
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { AppComponent } from "./app.component";
 
 // import filepond module
-import { FilePondModule, registerPlugin } from 'ngx-filepond';
+import { FilePondModule, registerPlugin } from "ngx-filepond";
 
 // import and register filepond file type validation plugin
-import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
+
 registerPlugin(FilePondPluginFileValidateType);
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    FilePondModule // add filepond module here
+    FilePondModule, // add filepond module here
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
 ```
 
 ```html
 <!-- app.component.html -->
-<file-pond #myPond 
-    [options]="pondOptions" 
-    [files]="pondFiles"
-    (oninit)="pondHandleInit()"
-    (onaddfile)="pondHandleAddFile($event)"
-    (onactivatefile)="pondHandleActivateFile($event)">
+<file-pond
+  #myPond
+  [options]="pondOptions"
+  [files]="pondFiles"
+  (oninit)="pondHandleInit()"
+  (onaddfile)="pondHandleAddFile($event)"
+  (onactivatefile)="pondHandleActivateFile($event)"
+>
 </file-pond>
 ```
 
 ```ts
 // app.component.ts
-import { Component, ViewChild } from '@angular/core';
-import { FilePondComponent } from 'ngx-filepond';
-import { FilePondOptions } from 'filepond';
+import { Component, ViewChild } from "@angular/core";
+import { FilePondComponent } from "ngx-filepond";
+import { FilePondOptions } from "filepond";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
-
 export class AppComponent {
-
-  @ViewChild('myPond') myPond: FilePondComponent
+  @ViewChild("myPond") myPond: FilePondComponent;
 
   pondOptions: FilePondOptions = {
     allowMultiple: true,
-    labelIdle: 'Drop files here...'
-  }
+    labelIdle: "Drop files here...",
+  };
 
   pondFiles: FilePondOptions["files"] = [
     {
-      source: 'assets/photo.jpeg',
+      source: "assets/photo.jpeg",
       options: {
-        type: 'local'
-      }
-    }
-  ]
+        type: "local",
+      },
+    },
+  ];
 
   pondHandleInit() {
-    console.log('FilePond has initialised', this.myPond);
+    console.log("FilePond has initialised", this.myPond);
   }
 
   pondHandleAddFile(event: any) {
-    console.log('A file was added', event);
+    console.log("A file was added", event);
   }
 
   pondHandleActivateFile(event: any) {
-    console.log('A file was activated', event)
+    console.log("A file was activated", event);
   }
-
 }
+```
 
+## How to fix import errors
+
+If you get a `"types/index" has no default export` error, you can either rewrite the import:
+
+```js
+import * as FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
+```
+
+Or add these 2 lines to your `tsconfig.json` file:
+
+```json
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  }
+}
 ```
 
 [Read the docs for more information](https://pqina.nl/filepond/docs/patterns/frameworks/angular/)
