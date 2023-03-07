@@ -131,7 +131,7 @@ export class FilePondComponent implements AfterViewInit, OnChanges, OnDestroy {
     };
     outputs.forEach((event) => {
       this.root.nativeElement.addEventListener(
-        `FilePond:${event.substr(2)}`,
+        `FilePond:${event.slice(2)}`,
         this.handleEvent
       );
     });
@@ -197,7 +197,7 @@ export class FilePondComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     outputs.forEach((event) => {
       this.root.nativeElement.removeEventListener(
-        `FilePond:${event.substr(2)}`,
+        `FilePond:${event.slice(2)}`,
         this.handleEvent
       );
     });
