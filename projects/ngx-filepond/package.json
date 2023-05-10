@@ -1,6 +1,26 @@
 {
   "name": "ngx-filepond",
   "version": "7.0.1",
+  "description": "A handy FilePond adapter component for Angular",
+  "homepage": "https://pqina.nl/filepond",
+  "license": "MIT",
+  "author": {
+    "name": "PQINA",
+    "url": "https://pqina.nl"
+  },
+  "keywords": [
+    "angular",
+    "angularjs",
+    "ngx",
+    "filepond",
+    "file",
+    "upload",
+    "drag",
+    "drop",
+    "browse",
+    "image",
+    "preview"
+  ],
   "peerDependencies": {
     "@angular/common": ">=14.x",
     "@angular/core": ">=14.x",
