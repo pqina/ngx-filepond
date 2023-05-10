@@ -1,9 +1,9 @@
 {
   "name": "ngx-filepond",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "peerDependencies": {
-    "@angular/common": "^15.2.0",
-    "@angular/core": "^15.2.0",
+    "@angular/common": ">=14.x",
+    "@angular/core": ">=14.x",
     "filepond": ">=4.19.1 <5.x"
   },
   "dependencies": {
