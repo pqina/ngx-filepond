@@ -48,7 +48,7 @@ const outputs: Array<string> = [
   "oninit",
   "onwarning",
   "onerror",
-  "onactivatefile",
+  "oninitfile",
   "onaddfilestart",
   "onaddfileprogress",
   "onaddfile",
@@ -61,6 +61,8 @@ const outputs: Array<string> = [
   "onremovefile",
   "onpreparefile",
   "onupdatefiles",
+  "onactivatefile",
+  "onreorderfiles",
 ];
 
 // Component outline
