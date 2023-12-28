@@ -83,6 +83,7 @@ export class FilePondComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Output() oninit = new EventEmitter<any>();
   @Output() onwarning = new EventEmitter<any>();
   @Output() onerror = new EventEmitter<any>();
+  @Output() oninitfile = new EventEmitter<any>();
   @Output() onactivatefile = new EventEmitter<any>();
   @Output() onaddfilestart = new EventEmitter<any>();
   @Output() onaddfileprogress = new EventEmitter<any>();
@@ -96,6 +97,7 @@ export class FilePondComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Output() onremovefile = new EventEmitter<any>();
   @Output() onpreparefile = new EventEmitter<any>();
   @Output() onupdatefiles = new EventEmitter<any>();
+  @Output() onreorderfiles = new EventEmitter<any>();
 
   private root: ElementRef;
   private zone: NgZone;
