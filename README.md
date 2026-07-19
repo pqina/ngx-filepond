@@ -49,11 +49,80 @@ Install FilePond component from npm.
 npm install filepond ngx-filepond --save
 ```
 
-Import `FilePondModule` and if needed register any plugins. Please note that plugins need to be [installed from npm](https://pqina.nl/filepond/docs/patterns/plugins/introduction/#installing-plugins) separately.
+> **Note for v7.x users (Angular 20+)**: ngx-filepond v7.x is a standalone component that uses Angular Signals. If you're migrating from v6.x, check the [Migration Guide](./MIGRATION-GUIDE.md).
 
 Add FilePond styles path `./node_modules/filepond/dist/filepond.min.css` to the `build.options.styles` property in `angular.json`
 
-[Setting up FilePond with Angular 13](https://github.com/pqina/ngx-filepond/issues/70#issuecomment-1273741734)
+### Modern Usage (Angular 20+, ngx-filepond v7.x)
+
+Import `FilePondComponent` directly as a standalone component. Register any plugins using `registerPlugin`. Please note that plugins need to be [installed from npm](https://pqina.nl/filepond/docs/patterns/plugins/introduction/#installing-plugins) separately.
+
+```ts
+// app.component.ts
+import { Component, ViewChild } from "@angular/core";
+import { FilePondComponent, registerPlugin } from "ngx-filepond";
+import { FilePondOptions } from "filepond";
+
+// import and register filepond file type validation plugin
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
+
+registerPlugin(FilePondPluginFileValidateType);
+
+@Component({
+  selector: "app-root",
+  standalone: true,
+  imports: [FilePondComponent], // import component directly
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
+})
+export class AppComponent {
+  @ViewChild("myPond") myPond!: FilePondComponent;
+
+  pondOptions: FilePondOptions = {
+    allowMultiple: true,
+    labelIdle: "Drop files here...",
+  };
+
+  pondFiles: FilePondOptions["files"] = [
+    {
+      source: "assets/photo.jpeg",
+      options: {
+        type: "local",
+      },
+    },
+  ];
+
+  pondHandleInit() {
+    console.log("FilePond has initialised", this.myPond);
+  }
+
+  pondHandleAddFile(event: any) {
+    console.log("A file was added", event);
+  }
+
+  pondHandleActivateFile(event: any) {
+    console.log("A file was activated", event);
+  }
+}
+```
+
+```html
+<!-- app.component.html -->
+<file-pond
+  #myPond
+  [options]="pondOptions"
+  [files]="pondFiles"
+  (oninit)="pondHandleInit()"
+  (onaddfile)="pondHandleAddFile($event)"
+  (onactivatefile)="pondHandleActivateFile($event)"
+>
+</file-pond>
+```
+
+### Legacy Usage (Angular 14-19, ngx-filepond v6.x)
+
+<details>
+<summary>Click to see legacy module-based setup</summary>
 
 ```ts
 // app.module.ts
@@ -79,19 +148,6 @@ registerPlugin(FilePondPluginFileValidateType);
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-```
-
-```html
-<!-- app.component.html -->
-<file-pond
-  #myPond
-  [options]="pondOptions"
-  [files]="pondFiles"
-  (oninit)="pondHandleInit()"
-  (onaddfile)="pondHandleAddFile($event)"
-  (onactivatefile)="pondHandleActivateFile($event)"
->
-</file-pond>
 ```
 
 ```ts
@@ -135,6 +191,8 @@ export class AppComponent {
   }
 }
 ```
+
+</details>
 
 ## How to run project
 

@@ -1,6 +1,6 @@
 {
   "name": "ngx-filepond",
-  "version": "7.0.3",
+  "version": "7.1.0",
   "description": "A handy FilePond adapter component for Angular",
   "homepage": "https://pqina.nl/filepond",
   "license": "MIT",

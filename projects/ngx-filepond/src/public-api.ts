@@ -3,4 +3,4 @@
  */
 
 export * from './lib/ngx-filepond.component';
-export * from './lib/ngx-filepond.module';
+export { registerPlugin } from 'filepond';

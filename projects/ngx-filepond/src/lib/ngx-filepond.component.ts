@@ -1,15 +1,14 @@
 import {
   Component,
   ElementRef,
-  SimpleChanges,
   ViewEncapsulation,
-  EventEmitter,
   NgZone,
-  Input,
-  Output,
   AfterViewInit,
-  OnChanges,
   OnDestroy,
+  inject,
+  input,
+  output,
+  effect,
 } from "@angular/core";
 
 import { create, supported, FilePond, FilePondOptions } from "filepond";
@@ -67,46 +66,58 @@ const outputs: Array<string> = [
 
 // Component outline
 @Component({
-  selector: "file-pond",
-  encapsulation: ViewEncapsulation.None,
-  templateUrl: "./ngx-filepond.component.html",
-  styleUrls: ["./ngx-filepond.component.css"],
+    selector: "file-pond",
+    encapsulation: ViewEncapsulation.None,
+    templateUrl: "./ngx-filepond.component.html",
+    styleUrls: ["./ngx-filepond.component.css"],
+    standalone: true
 })
-export class FilePondComponent implements AfterViewInit, OnChanges, OnDestroy {
-  @Input()
-  options: FilePondOptions | any = {};
+export class FilePondComponent implements AfterViewInit, OnDestroy {
+  // Input signals
+  options = input<FilePondOptions | any>({});
+  files = input<FilePondOptions["files"]>();
 
-  @Input()
-  files: FilePondOptions["files"];
+  // Output signals
+  oninit = output<any>();
+  onwarning = output<any>();
+  onerror = output<any>();
+  oninitfile = output<any>();
+  onactivatefile = output<any>();
+  onaddfilestart = output<any>();
+  onaddfileprogress = output<any>();
+  onaddfile = output<any>();
+  onprocessfilestart = output<any>();
+  onprocessfileprogress = output<any>();
+  onprocessfileabort = output<any>();
+  onprocessfilerevert = output<any>();
+  onprocessfile = output<any>();
+  onprocessfiles = output<any>();
+  onremovefile = output<any>();
+  onpreparefile = output<any>();
+  onupdatefiles = output<any>();
+  onreorderfiles = output<any>();
 
-  // same as outputs array
-  @Output() oninit = new EventEmitter<any>();
-  @Output() onwarning = new EventEmitter<any>();
-  @Output() onerror = new EventEmitter<any>();
-  @Output() oninitfile = new EventEmitter<any>();
-  @Output() onactivatefile = new EventEmitter<any>();
-  @Output() onaddfilestart = new EventEmitter<any>();
-  @Output() onaddfileprogress = new EventEmitter<any>();
-  @Output() onaddfile = new EventEmitter<any>();
-  @Output() onprocessfilestart = new EventEmitter<any>();
-  @Output() onprocessfileprogress = new EventEmitter<any>();
-  @Output() onprocessfileabort = new EventEmitter<any>();
-  @Output() onprocessfilerevert = new EventEmitter<any>();
-  @Output() onprocessfile = new EventEmitter<any>();
-  @Output() onprocessfiles = new EventEmitter<any>();
-  @Output() onremovefile = new EventEmitter<any>();
-  @Output() onpreparefile = new EventEmitter<any>();
-  @Output() onupdatefiles = new EventEmitter<any>();
-  @Output() onreorderfiles = new EventEmitter<any>();
+  // Dependencies using inject()
+  private root = inject(ElementRef);
+  private zone = inject(NgZone);
 
-  private root: ElementRef;
-  private zone: NgZone;
   private pond: FilePond | null = null;
   private handleEvent: Function | null = null;
 
-  constructor(root: ElementRef, zone: NgZone) {
-    this.root = root;
-    this.zone = zone;
+  constructor() {
+    // Effect to handle changes in options and files
+    effect(() => {
+      const currentOptions = this.options();
+      const currentFiles = this.files();
+
+      // Only update if pond is initialized
+      if (this.pond) {
+        this.pond.setOptions({
+          ...currentOptions,
+          files: currentFiles,
+        });
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -114,10 +125,11 @@ export class FilePondComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     // transfer relevant attributes to input, this so we still have an input with the correct attributes should file pond not load
     const attributes = this.root.nativeElement.attributes;
+    const currentOptions = this.options();
     inputAttributes.forEach((name) => {
       const value = attributes[name]
         ? attributes[name].value
-        : this.options[name];
+        : currentOptions[name];
       if (!value) {
         return;
       }
@@ -129,7 +141,7 @@ export class FilePondComponent implements AfterViewInit, OnChanges, OnDestroy {
       return;
     }
 
-    // map FilePond events to Angular @outputs
+    // map FilePond events to Angular output signals
     this.handleEvent = (e: Event) => {
       const key = `on${e.type.split(":")[1]}`;
       // @ts-ignore
@@ -147,10 +159,10 @@ export class FilePondComponent implements AfterViewInit, OnChanges, OnDestroy {
       // create instance
       this.pond = create(input, {
         // our options
-        ...this.options,
+        ...currentOptions,
 
         // our initial files
-        files: this.files,
+        files: this.files(),
       });
     });
 
@@ -168,33 +180,6 @@ export class FilePondComponent implements AfterViewInit, OnChanges, OnDestroy {
         });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    // no need to handle first change
-    if (changes["firstChange"]) return;
-
-    // no filepond instance available
-    if (!this.pond) {
-      return;
-    }
-
-    // use new options object as base ( or if not available, use current options )
-    const options = changes["options"]
-      ? changes["options"].currentValue
-      : this.options;
-
-    // see if file list has changed
-    if (
-      changes["files"] &&
-      JSON.stringify(changes["files"].previousValue) !==
-        JSON.stringify(changes["files"].currentValue)
-    ) {
-      // file list has changed
-      options.files = changes["files"].currentValue;
-    }
-
-    // set new options
-    this.pond.setOptions(options);
-  }
 
   ngOnDestroy() {
     if (!this.pond) {

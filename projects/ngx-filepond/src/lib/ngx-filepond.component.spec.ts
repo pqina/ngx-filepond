@@ -8,7 +8,7 @@ describe('FilePondComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FilePondComponent],
+      imports: [FilePondComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(FilePondComponent);
